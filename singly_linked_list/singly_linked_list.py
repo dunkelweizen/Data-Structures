@@ -59,7 +59,7 @@ class LinkedList:
             self.tail = None
             return value
         current = self.head
-        while current.get_next_node() is not self.tail:
+        while current.get_next_node() is not None:
             current = current.get_next_node()
         value = self.tail.get_value()
         self.tail = current
