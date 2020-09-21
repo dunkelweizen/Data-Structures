@@ -53,15 +53,14 @@ class LinkedList:
     def remove_tail(self):
         if not self.head:
             return None
+        value = self.tail.value
         if self.head is self.tail:
-            value = self.head.get_value()
             self.head = None
             self.tail = None
             return value
         current = self.head
-        while current.get_next_node() is not None:
-            current = current.get_next_node()
-        value = self.tail.get_value()
+        while current.next_node.get_next_node() is not None:
+            current = current.next_node
         self.tail = current
         return value
 
@@ -82,5 +81,4 @@ class LinkedList:
             if cur_node.get_value() > max_value:
                 max_value = cur_node.get_value()
         return max_value
-
 

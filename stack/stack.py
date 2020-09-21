@@ -42,17 +42,28 @@ class Stack:
         return self.size
 
     def push(self, value):
-        if self.storage.head is None:
-            self.storage.head = Node(value)
-        else:
-            new_node = Node(value)
-            new_node.set_next_node(self.storage.head)
-            self.storage.head = new_node
+        self.storage.add_to_tail(value)
         self.size += 1
 
     def pop(self):
-        if self.__len__() == 0:
+        if self.size == 0:
             return None
-        else:
+        elif self.size == 1:
+            ret_value = self.storage.head.value
+            self.storage.head = None
+            self.storage.tail = None
             self.size -= 1
-            return self.storage.remove_head()
+            return ret_value
+        elif self.size == 2:
+            self.size -= 1
+            return self.storage.remove_tail()
+
+        else:
+            ret_value = self.storage.tail.value
+            self.size -= 1
+            current = self.storage.head
+            while current.next_node.get_next_node() is not None:
+                current = current.next_node
+            self.storage.tail = current
+            self.storage.tail.set_next_value = None
+            return ret_value

@@ -1,3 +1,4 @@
+
 class Node:
     def __init__(self, value=None, next_node=None):
         self.value = value
@@ -52,15 +53,14 @@ class LinkedList:
     def remove_tail(self):
         if not self.head:
             return None
+        value = self.tail.value
         if self.head is self.tail:
-            value = self.head.get_value()
             self.head = None
             self.tail = None
             return value
         current = self.head
-        while current.get_next_node() is not self.tail:
-            current = current.get_next_node()
-        value = self.tail.get_value()
+        while current.next_node.get_next_node() is not None:
+            current = current.next_node
         self.tail = current
         return value
 
@@ -82,37 +82,3 @@ class LinkedList:
                 max_value = cur_node.get_value()
         return max_value
 
-    # def __iter__(self):
-    #     return LinkedListIterator(self)
-
-    def __len__(self):
-        copy = self
-        if copy.head is None and copy.tail is None:
-            return 0
-        elif copy.head == copy.tail:
-            return 1
-        else:
-            count = 1
-            while copy.head.get_next_node():
-                copy.remove_head()
-                count += 1
-            return count
-
-
-# class LinkedListIterator:
-#     def __init__(self, linkedlist):
-#         self._linkedlist = linkedlist
-#         self._index = 0
-#         self.current_node = self._linkedlist.head
-#
-#     def __next__(self):
-#         if self._linkedlist.head is None and self._linkedlist.tail is None:
-#             return None
-#         elif self._linkedlist.head == self._linkedlist.tail:
-#             return None
-#         if self._index < len(self._linkedlist):
-#             next_node = self.current_node.get_next_node()
-#             self._index += 1
-#             self.current_node = self.current_node.next_node
-#             return next_node
-#         raise StopIteration
