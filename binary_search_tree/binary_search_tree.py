@@ -20,7 +20,7 @@ class BSTNode:
     # Insert the given value into the tree
     def insert(self, value):
         # if current node value is less than new value, go right
-        if self.value < value:
+        if self.value <= value:
             # if right child does not exist, add it
             if not self.right:
                 self.right = BSTNode(value)
