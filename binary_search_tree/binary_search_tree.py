@@ -108,9 +108,9 @@ class BSTNode:
         while current_node:
             current_node = q.dequeue()
             if current_node:
-                if current_node.left: #and not q.contains(current_node.left):
+                if current_node.left:
                     q.enqueue(current_node.left)
-                if current_node.right: # and not q.contains(current_node.right):
+                if current_node.right:
                     q.enqueue(current_node.right)
 
                 print(current_node.value)
@@ -121,18 +121,37 @@ class BSTNode:
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self):
-        pass
+        #print value of given node
+        #go left as far as possible, printing each node
+        #backtrack to the most recent node with a left child, and trace that
+        #repeat for all nodes in the tree
+        print(self.value)
+        if self.left:
+            self.left.dft_print()
+        if self.right:
+            self.right.dft_print()
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
 
     # Print Pre-order recursive DFT
     def pre_order_dft(self):
-        pass
+        print(self.value)
+        if self.left:
+            self.left.pre_order_dft()
+        if self.right:
+            self.right.pre_order_dft()
 
     # Print Post-order recursive DFT
     def post_order_dft(self):
-        pass
+        if self.left:
+            self.left.post_order_dft()
+        if self.right:
+            self.right.post_order_dft()
+        print(self.value)
+
+
 
 
 """
@@ -147,14 +166,15 @@ bst.insert(6)
 bst.insert(3)
 bst.insert(4)
 bst.insert(2)
-
+print("BFT")
 bst.bft_print()
-# bst.dft_print()
-#
-# print("elegant methods")
-# print("pre order")
-# bst.pre_order_dft()
+print("DFT")
+bst.dft_print()
+
+print("elegant methods")
+print("pre order")
+bst.pre_order_dft()
 print("in order")
 bst.in_order_print()
-# print("post order")
-# bst.post_order_dft()
+print("post order")
+bst.post_order_dft()
