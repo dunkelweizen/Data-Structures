@@ -3,18 +3,21 @@ class Heap:
         self.storage = []
 
     def insert(self, value):
-        if len(self.storage) == 0:
-            self.storage.append(value)
-        elif self.storage[-1] > value:
-            self.storage.append(value)
-        else:
-            for i in range(len(self.storage)):
-                if self.storage[i] <= value:
-                    self.storage.insert(i, value)
-                    break
+        self.storage.append(value)
+        for i in range(len(self.storage)):
+            try:
+                self._sift_down(i)
+            except IndexError:
+                pass
+        for i in range(len(self.storage)-1, 0,-1):
+            try:
+                self._bubble_up(i)
+            except IndexError:
+                pass
+
 
     def delete(self):
-        pass
+        return self.storage.pop(0)
 
     def get_max(self):
         return self.storage[0]
